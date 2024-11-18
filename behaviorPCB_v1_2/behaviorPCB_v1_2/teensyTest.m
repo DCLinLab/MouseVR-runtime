@@ -10,6 +10,7 @@ fprintf(s,'000000');
 %% read response
 flushinput(s);
 
+
 %%
 fprintf(s,'100000');
 tic;

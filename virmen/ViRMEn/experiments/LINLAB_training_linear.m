@@ -129,26 +129,9 @@ if abs(vr.currentRewardLocation-vr.position(2))>vr.session.rewardZoneRadius
 end
 
 if vr.isLick
-    if vr.localRewardsRemaining>0
-        vr = giveReward(vr,vr.session.rewardSize);
-        vr.localRewardsRemaining = vr.localRewardsRemaining - 1;
-        global lickCount;
-        display(lickCount);
-
-        
-    elseif min(abs(vr.rewardLocationsRemaining-vr.position(2)))<=vr.session.rewardZoneRadius
-        % find reward location
-        [~, i] = min(abs(vr.rewardLocationsRemaining-vr.position(2)));
-        vr.currentRewardLocation = vr.rewardLocationsRemaining(i);
-        vr.rewardLocationsRemaining(i) = [];
-        ind=find(vr.condition(vr.trial(vr.tN).type).rewardLocations==vr.currentRewardLocation);
-        vr.localRewardsRemaining = vr.condition(vr.trial(vr.tN).type).rewardsPerLocation(ind);
-        
-        vr = giveReward(vr,vr.session.rewardSize);
-        vr.localRewardsRemaining = vr.localRewardsRemaining - 1;
-    else
-        % do nothing.
-    end    
+    vr = giveReward(vr, vr.session.rewardSize);
+    global lickCount;
+    fprintf('Lick: %d, Time: %s\n', lickCount, datestr(datetime('now'), 'yyyy-mm-dd HH:MM:SS'));
 end
 
 vr = commonRuntime(vr,'iterEnd');

@@ -1,5 +1,5 @@
 function vr = commonTermination(vr)
 
-% daqreset;
+daqreset;
 fclose(vr.iterFileID);
 fclose(vr.trialFileID);

@@ -1,3 +1,0 @@
-%%
-
-exper.run;testDELETE

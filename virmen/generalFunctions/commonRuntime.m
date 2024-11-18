@@ -1,7 +1,7 @@
  function vr = commonRuntime(vr,phase)
 
 global lickCount
-global mvData
+global daqData
 vr.cond = vr.trial(vr.tN).type;
 % vr.binN = find(vr.condition(vr.cond).binEdges<vr.position(2),1,'last');
 % vr.binN(vr.binN>(length(vr.condition(vr.cond).binEdges)-1)) = length(vr.condition(vr.cond).binEdges)-1;
@@ -10,9 +10,10 @@ vr.cond = vr.trial(vr.tN).type;
 
 switch phase
     case 'iterStart'
+        lickCount = read(vr.ci).Variables;
         vr.isLick = lickCount - vr.lastLickCount;
         vr.lastLickCount = lickCount;
-        vr.rawMovement = mvData;
+        vr.rawMovement = daqData;
         vr.iN = vr.iN+1;
         vr.reward = 0;
         vr.punishment = 0;
@@ -25,7 +26,7 @@ switch phase
                 vr.isLick = 1;
             case 82
                 % R key to deliver reward manually
-                vr = giveReward(vr,vr.session.rewardSize);
+                vr = giveReward(vr, 50);
                 vr.manualReward = 1;
             case 80
                 % P key to give air puff
